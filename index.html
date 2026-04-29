@@ -182,14 +182,11 @@ loader.load('cat.glb', (gltf) => {
     if (child.isMesh) {
       child.castShadow = true;
       child.receiveShadow = true;
-
-      // Apply a nice Siamese cat material since texture is external
-      child.material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color(0.70, 0.55, 0.40),
-        roughness: 0.72,
-        metalness: 0.0,
-      });
-
+      // Keep original GLB material (texture from Substance Painter)
+      if (child.material) {
+        child.material.roughness = 0.75;
+        child.material.metalness = 0.0;
+      }
       catMesh = child;
     }
   });
